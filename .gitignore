@@ -1,0 +1,28 @@
+# dependencies
+node_modules/
+
+# build output
+dist/
+dist-ssr/
+dev-dist/
+*.tsbuildinfo
+
+# Claude Code local config / tooling
+.claude/
+
+# logs
+*.log
+npm-debug.log*
+
+# editor / OS
+.DS_Store
+*.local
+.vscode/*
+!.vscode/extensions.json
+
+# local dev helpers (machine-specific absolute paths)
+scripts/dev.cmd
+
+# league seed with real player names — kept local, not published
+supabase/seed_gdl_2025-2026.sql
+_source_assets/

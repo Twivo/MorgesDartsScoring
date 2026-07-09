@@ -1,0 +1,236 @@
+/**
+ * LocalStorage fallback (used when Supabase isn't configured, and as an
+ * offline cache). Keeps the app fully usable with no backend.
+ */
+import { createId } from '@/lib/id';
+import type { DartsRepository, PlayerInput } from '../repository';
+import type {
+  EncounterRecord,
+  MatchQuery,
+  MatchRecord,
+  PlayerQuery,
+  PlayerRecord,
+  Season,
+  TeamRecord,
+  TeamWithPlayers,
+} from '../types';
+
+const PLAYERS_KEY = 'darts:players:v2';
+const MATCHES_KEY = 'darts:matches:v2';
+const TEAMS_KEY = 'darts:teams:v1';
+const TEAM_PLAYERS_KEY = 'darts:team-players:v1';
+const ENCOUNTERS_KEY = 'darts:encounters:v1';
+
+const LOCAL_SEASON: Season = {
+  id: 'local-2026-2027',
+  name: '2026/2027',
+  isCurrent: true,
+};
+
+function read<T>(key: string, fallback: T): T {
+  try {
+    const raw = localStorage.getItem(key);
+    return raw ? (JSON.parse(raw) as T) : fallback;
+  } catch {
+    return fallback;
+  }
+}
+function write<T>(key: string, value: T): void {
+  try {
+    localStorage.setItem(key, JSON.stringify(value));
+  } catch {
+    /* ignore quota errors */
+  }
+}
+
+export class LocalRepository implements DartsRepository {
+  async listPlayers(query: PlayerQuery = {}): Promise<PlayerRecord[]> {
+    let players = read<PlayerRecord[]>(PLAYERS_KEY, []);
+    if (query.activeOnly) players = players.filter((p) => p.active);
+    if (query.search) {
+      const s = query.search.toLowerCase();
+      players = players.filter((p) => p.name.toLowerCase().includes(s));
+    }
+    const dir = (query.sortDir ?? 'asc') === 'asc' ? 1 : -1;
+    players.sort((a, b) =>
+      query.sortBy === 'createdAt'
+        ? ((a.createdAt ?? '') < (b.createdAt ?? '') ? -1 : 1) * dir
+        : a.name.localeCompare(b.name) * dir,
+    );
+    return players;
+  }
+
+  async createPlayer(input: PlayerInput): Promise<PlayerRecord> {
+    const players = read<PlayerRecord[]>(PLAYERS_KEY, []);
+    const player: PlayerRecord = {
+      id: createId('p'),
+      name: input.name,
+      color: input.color ?? null,
+      active: input.active ?? true,
+      createdAt: new Date().toISOString(),
+    };
+    write(PLAYERS_KEY, [...players, player]);
+    return player;
+  }
+
+  async updatePlayer(
+    id: string,
+    patch: Partial<PlayerInput>,
+  ): Promise<PlayerRecord> {
+    const players = read<PlayerRecord[]>(PLAYERS_KEY, []);
+    const next = players.map((p) => (p.id === id ? { ...p, ...patch } : p));
+    write(PLAYERS_KEY, next);
+    return next.find((p) => p.id === id)!;
+  }
+
+  async deletePlayer(id: string): Promise<void> {
+    const players = read<PlayerRecord[]>(PLAYERS_KEY, []);
+    write(
+      PLAYERS_KEY,
+      players.filter((p) => p.id !== id),
+    );
+  }
+
+  async listSeasons(): Promise<Season[]> {
+    return [LOCAL_SEASON];
+  }
+  async getCurrentSeason(): Promise<Season> {
+    return LOCAL_SEASON;
+  }
+
+  async listMatches(query: MatchQuery = {}): Promise<MatchRecord[]> {
+    let matches = read<MatchRecord[]>(MATCHES_KEY, []);
+    matches = query.encounterId
+      ? matches.filter((m) => m.encounterId === query.encounterId)
+      : query.championship
+        ? matches.filter((m) => !!m.encounterId)
+        : matches.filter((m) => !m.encounterId);
+    if (query.mode) matches = matches.filter((m) => m.mode === query.mode);
+    if (query.status) matches = matches.filter((m) => m.status === query.status);
+    if (query.playerId)
+      matches = matches.filter((m) =>
+        m.config.players.some((p) => p.id === query.playerId),
+      );
+    return matches.sort((a, b) =>
+      (a.createdAt ?? '') < (b.createdAt ?? '') ? 1 : -1,
+    );
+  }
+
+  async getMatch(id: string): Promise<MatchRecord | null> {
+    return read<MatchRecord[]>(MATCHES_KEY, []).find((m) => m.id === id) ?? null;
+  }
+
+  async saveMatch(record: MatchRecord): Promise<void> {
+    const matches = read<MatchRecord[]>(MATCHES_KEY, []);
+    const idx = matches.findIndex((m) => m.id === record.id);
+    const stamped = { ...record, updatedAt: new Date().toISOString() };
+    if (idx >= 0) matches[idx] = stamped;
+    else matches.push({ ...stamped, createdAt: new Date().toISOString() });
+    write(MATCHES_KEY, matches);
+  }
+
+  async listInProgress(): Promise<MatchRecord[]> {
+    return (await this.listMatches({ status: 'IN_PROGRESS' })).sort((a, b) =>
+      (a.updatedAt ?? '') < (b.updatedAt ?? '') ? 1 : -1,
+    );
+  }
+
+  async listLiveMatches(): Promise<MatchRecord[]> {
+    const all = read<MatchRecord[]>(MATCHES_KEY, []).filter(
+      (m) => m.status === 'IN_PROGRESS',
+    );
+    return all.sort((a, b) =>
+      (a.updatedAt ?? '') < (b.updatedAt ?? '') ? 1 : -1,
+    );
+  }
+
+  // --- teams ---------------------------------------------------------------
+
+  async listTeams(search?: string): Promise<TeamWithPlayers[]> {
+    const teams = read<TeamRecord[]>(TEAMS_KEY, []);
+    const links = read<{ teamId: string; playerId: string }[]>(
+      TEAM_PLAYERS_KEY,
+      [],
+    );
+    const s = search?.trim().toLowerCase();
+    return teams
+      .filter((t) => !s || t.name.toLowerCase().includes(s))
+      .map((t) => ({
+        ...t,
+        playerIds: links.filter((l) => l.teamId === t.id).map((l) => l.playerId),
+      }))
+      .sort((a, b) => a.name.localeCompare(b.name));
+  }
+
+  async createTeam(name: string): Promise<TeamRecord> {
+    const teams = read<TeamRecord[]>(TEAMS_KEY, []);
+    const team: TeamRecord = {
+      id: createId('team'),
+      name: name.trim(),
+      createdAt: new Date().toISOString(),
+    };
+    write(TEAMS_KEY, [...teams, team]);
+    return team;
+  }
+
+  async updateTeam(id: string, patch: { name: string }): Promise<TeamRecord> {
+    const teams = read<TeamRecord[]>(TEAMS_KEY, []).map((t) =>
+      t.id === id ? { ...t, ...patch } : t,
+    );
+    write(TEAMS_KEY, teams);
+    return teams.find((t) => t.id === id)!;
+  }
+
+  async deleteTeam(id: string): Promise<void> {
+    write(
+      TEAMS_KEY,
+      read<TeamRecord[]>(TEAMS_KEY, []).filter((t) => t.id !== id),
+    );
+    write(
+      TEAM_PLAYERS_KEY,
+      read<{ teamId: string; playerId: string }[]>(TEAM_PLAYERS_KEY, []).filter(
+        (l) => l.teamId !== id,
+      ),
+    );
+  }
+
+  async setTeamPlayers(teamId: string, playerIds: string[]): Promise<void> {
+    const others = read<{ teamId: string; playerId: string }[]>(
+      TEAM_PLAYERS_KEY,
+      [],
+    ).filter((l) => l.teamId !== teamId);
+    write(TEAM_PLAYERS_KEY, [
+      ...others,
+      ...playerIds.map((playerId) => ({ teamId, playerId })),
+    ]);
+  }
+
+  // --- encounters ----------------------------------------------------------
+
+  async getEncounter(id: string): Promise<EncounterRecord | null> {
+    return (
+      read<EncounterRecord[]>(ENCOUNTERS_KEY, []).find((e) => e.id === id) ?? null
+    );
+  }
+
+  async saveEncounter(record: EncounterRecord): Promise<void> {
+    const list = read<EncounterRecord[]>(ENCOUNTERS_KEY, []);
+    const idx = list.findIndex((e) => e.id === record.id);
+    const stamped = { ...record, updatedAt: new Date().toISOString() };
+    if (idx >= 0) list[idx] = stamped;
+    else list.push({ ...stamped, createdAt: new Date().toISOString() });
+    write(ENCOUNTERS_KEY, list);
+  }
+
+  async listEncounters(seasonId?: string): Promise<EncounterRecord[]> {
+    return read<EncounterRecord[]>(ENCOUNTERS_KEY, [])
+      .filter((e) => !seasonId || e.seasonId === seasonId)
+      .sort((a, b) => ((a.createdAt ?? '') < (b.createdAt ?? '') ? 1 : -1));
+  }
+
+  async listEncountersInProgress(): Promise<EncounterRecord[]> {
+    return (await this.listEncounters()).filter(
+      (e) => e.status === 'IN_PROGRESS',
+    );
+  }
+}

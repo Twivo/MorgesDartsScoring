@@ -1,0 +1,102 @@
+@import 'tailwindcss';
+
+@theme {
+  /* Esport dark palette — refined for contrast & hierarchy */
+  --color-bg: #0a0c10;
+  --color-surface: #13161c;
+  --color-surface-2: #1b1f27;
+  --color-surface-3: #252b35;
+  --color-border: #2b323d;
+  --color-border-strong: #3a4250;
+
+  --color-accent: #ef2b2d;
+  --color-accent-hover: #ff4244;
+  --color-accent-dim: #5e1414;
+  --color-accent-soft: #2a1416;
+
+  --color-text: #f2f4f7;
+  --color-text-dim: #98a2b3;
+  --color-text-mute: #667085;
+
+  --color-success: #22c55e;
+  --color-success-dim: #14361f;
+  --color-warning: #f5a524;
+  --color-info: #3b82f6;
+
+  --radius-card: 1rem;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  background:
+    radial-gradient(1200px 600px at 50% -10%, #14181f 0%, transparent 60%),
+    var(--color-bg);
+  color: var(--color-text);
+  font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  -webkit-user-select: none;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+  overscroll-behavior: none;
+}
+
+* {
+  -webkit-touch-callout: none;
+}
+
+button {
+  font-family: inherit;
+  cursor: pointer;
+  touch-action: manipulation;
+}
+
+.tnum {
+  font-variant-numeric: tabular-nums;
+}
+
+@keyframes pop-in {
+  0% {
+    transform: scale(0.9);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes player-switch {
+  0% {
+    transform: translateY(6px);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  20% { transform: translateX(-5px); }
+  40% { transform: translateX(5px); }
+  60% { transform: translateX(-3px); }
+  80% { transform: translateX(3px); }
+}
+
+.animate-pop-in {
+  animation: pop-in 0.15s ease-out;
+}
+
+.animate-player-switch {
+  animation: player-switch 0.22s ease-out;
+}
+
+.animate-shake {
+  animation: shake 0.3s ease-in-out;
+}
