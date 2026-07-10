@@ -22,8 +22,12 @@ const at = (baseDay, h, m) => new Date(baseDay + h * 3600000 + m * 60000).toISOS
 // --- encounters: one tie every 14 days, evening 19:30–21:15 ------------------
 const encs = (await get('encounters', 'select=id&order=id')).map((e) => e.id);
 console.log(`Spreading ${encs.length} encounters + their fixtures...`);
+// Distribute ties evenly across the season window (start+7 .. start+350 days),
+// so it fits whatever the encounter count is.
+const SPAN = 343; // days of playable window
+const step = encs.length > 1 ? SPAN / (encs.length - 1) : 0;
 for (let i = 0; i < encs.length; i++) {
-  const day = seasonStart + i * 14 * DAY;
+  const day = seasonStart + Math.round(7 + i * step) * DAY;
   const created = at(day, 19, 30), finished = at(day, 21, 15);
   await patch('encounters', `id=eq.${encs[i]}`, { created_at: created, finished_at: finished });
   await patch('matches', `encounter_id=eq.${encs[i]}`, { created_at: created, finished_at: finished });
