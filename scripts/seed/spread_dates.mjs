@@ -15,7 +15,8 @@ async function get(t, qs) {
   return r.json();
 }
 const DAY = 86400000;
-const seasonStart = Date.UTC(2026, 8, 1); // 2026-09-01
+// Season start (first tie ~11 days later). Override with SEASON_START=YYYY-MM-DD.
+const seasonStart = Date.parse(`${process.env.SEASON_START || '2026-09-01'}T00:00:00Z`);
 const at = (baseDay, h, m) => new Date(baseDay + h * 3600000 + m * 60000).toISOString();
 
 // --- encounters: one tie every 14 days, evening 19:30–21:15 ------------------
