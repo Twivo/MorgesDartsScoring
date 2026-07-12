@@ -19,20 +19,20 @@ export function Header() {
       );
 
   return (
-    <header className="flex shrink-0 items-center justify-between border-b border-[var(--color-border)] bg-[var(--color-surface)] px-3 py-1 text-xs">
+    <header className="flex shrink-0 items-center justify-between border-b border-[var(--color-border)] bg-[var(--color-surface)] px-3 py-1.5 text-sm">
       <div
         key={activePlayerId}
-        className="animate-player-switch flex items-baseline gap-1.5 truncate"
+        className="animate-player-switch flex items-baseline gap-2 truncate"
       >
-        <span className="text-base font-black">
+        <span className="text-2xl font-black sm:text-3xl">
           {playerName(config, activePlayerId)}
         </span>
         {isDouble && (
-          <span className="rounded bg-[var(--color-accent)] px-1.5 py-0.5 text-[10px] font-bold text-white">
+          <span className="rounded bg-[var(--color-accent)] px-2 py-0.5 text-sm font-bold text-white">
             {participantLabel(config, activeParticipantId)}
           </span>
         )}
-        <span className="text-[var(--color-text-dim)]">{t('game.toThrowSuffix')}</span>
+        <span className="text-base text-[var(--color-text-dim)]">{t('game.toThrowSuffix')}</span>
       </div>
 
       {saveStatus !== 'saved' && (
@@ -61,7 +61,7 @@ export function Header() {
         </span>
       )}
 
-      <div className="shrink-0 text-right text-[var(--color-text-dim)]">
+      <div className="shrink-0 text-right text-base text-[var(--color-text-dim)]">
         <span className="font-semibold text-[var(--color-accent)]">
           {t('game.leg')} {legNumber}
         </span>{' '}

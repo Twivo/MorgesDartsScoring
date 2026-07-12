@@ -205,29 +205,29 @@ export function GameScreen({
       )}
     >
       {/* top control bar (compact single line) */}
-      <div className="flex shrink-0 items-center justify-between border-b border-[var(--color-border)] bg-[var(--color-surface)] px-1.5 py-0.5 text-xs">
+      <div className="flex shrink-0 items-center justify-between border-b border-[var(--color-border)] bg-[var(--color-surface)] px-2 py-1 text-base">
         <button
           onClick={() => navigate('/')}
-          className="rounded-md px-2 py-1 text-[var(--color-text-dim)] hover:bg-[var(--color-surface-2)]"
+          className="rounded-md px-3 py-1.5 font-semibold text-[var(--color-text-dim)] hover:bg-[var(--color-surface-2)]"
         >
           {t('common.home')}
         </button>
-        <div className="flex items-center gap-0.5">
+        <div className="flex items-center gap-1">
           <button
             onClick={undo}
-            className="rounded-md px-2 py-1 font-semibold hover:bg-[var(--color-surface-2)]"
+            className="rounded-md px-3 py-1.5 font-semibold hover:bg-[var(--color-surface-2)]"
           >
             {t('game.undo')}
           </button>
           <button
             onClick={forfeitCurrentLeg}
-            className="rounded-md px-2 py-1 text-[var(--color-warning)] hover:bg-[var(--color-surface-2)]"
+            className="rounded-md px-3 py-1.5 font-semibold text-[var(--color-warning)] hover:bg-[var(--color-surface-2)]"
           >
             {t('game.forfeitLeg')}
           </button>
           <button
             onClick={forfeitCurrentGame}
-            className="rounded-md px-2 py-1 text-[var(--color-accent)] hover:bg-[var(--color-surface-2)]"
+            className="rounded-md px-3 py-1.5 font-semibold text-[var(--color-accent)] hover:bg-[var(--color-surface-2)]"
           >
             {t('game.forfeitMatch')}
           </button>
@@ -251,7 +251,7 @@ export function GameScreen({
         </div>
 
         {/* keypad — finish long-press is integrated into the 1/2/3 keys */}
-        <div className="shrink-0 border-t border-[var(--color-border)] lg:flex lg:w-[440px] lg:flex-col lg:justify-center lg:border-l lg:border-t-0">
+        <div className="shrink-0 border-t border-[var(--color-border)] lg:flex lg:w-[540px] lg:flex-col lg:justify-center lg:border-l lg:border-t-0">
           <Keypad
             buffer={buffer}
             remainingBefore={remainingBefore}
