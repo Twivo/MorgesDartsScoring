@@ -50,9 +50,9 @@ elle peut etre reprise depuis l'accueil.
 L'ecran de scoring utilise de gros chiffres pour rester lisible depuis le board,
 a environ 3 metres. Il montre:
 
-- le joueur qui doit lancer, en grand, avec une petite etoile a cote du nom quand
-  ce joueur commence le leg;
-- les scores restants des deux joueurs, en grand;
+- le joueur qui doit lancer, en grand;
+- les scores restants des deux joueurs, en grand, avec une petite etoile a cote
+  du nom du joueur qui commence le leg;
 - le score restant du joueur actif en tres grand au centre, qui diminue en direct
   pendant la saisie;
 - le clavier de saisie;

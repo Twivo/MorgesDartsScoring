@@ -15,7 +15,8 @@ sont recalcules par le moteur TypeScript pur a partir de ces evenements.
 - Ecran de scoring a gros chiffres, lisible depuis le board (environ 3 metres):
   scores restants des deux joueurs en grand et score du joueur actif en tres
   grand au centre.
-- Etoile discrete a cote du nom du joueur actif quand il commence le leg.
+- Etoile discrete a cote du nom, dans la carte de score du joueur qui commence
+  le leg.
 - Matchs simples et doubles.
 - Mode entrainement public et rapide, utilisable sans connexion.
 - Mode championnat protege par connexion admin.

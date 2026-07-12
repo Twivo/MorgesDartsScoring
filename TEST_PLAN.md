@@ -50,8 +50,8 @@ Donnees recommandees:
 
 - [ ] Les chiffres sont assez gros pour etre lus depuis le board (environ 3 m):
       scores des deux joueurs et grand score central du joueur actif.
-- [ ] Une etoile discrete apparait a cote du nom quand le joueur actif commence
-      le leg, et disparait quand c'est l'autre joueur qui lance.
+- [ ] Une etoile discrete apparait a cote du nom, dans la carte de score du
+      joueur qui commence le leg, et reste sur cette carte pendant tout le leg.
 - [ ] Saisir un score valide puis valider.
 - [ ] Le grand score central diminue en direct pendant la saisie.
 - [ ] Toucher le grand score central valide aussi la visite.
@@ -62,7 +62,8 @@ Donnees recommandees:
 - [ ] Le bouton Bust apparait seulement quand il est pertinent.
 - [ ] Les finishes proposent les choix de flechettes possibles.
 - [ ] Un checkout termine le leg.
-- [ ] Le starter alterne au leg suivant, et l'etoile suit le nouveau starter.
+- [ ] Le starter alterne au leg suivant, et l'etoile passe sur la carte du
+      nouveau starter.
 - [ ] Gagner le nombre de legs requis affiche l'ecran final.
 - [ ] Undo annule la derniere action.
 - [ ] Une visite peut etre modifiee si l'UI le permet.

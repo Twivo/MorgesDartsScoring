@@ -23,7 +23,7 @@ export function ScoreBoard({
 }) {
   const { config, state } = useGame();
   const { t } = useT();
-  const { activeParticipantId, remaining, legsWon, stats } = state;
+  const { activeParticipantId, legStarterId, remaining, legsWon, stats } = state;
 
   return (
     <div className="px-4 pt-3">
@@ -42,8 +42,19 @@ export function ScoreBoard({
               )}
             >
               <div className="flex items-center justify-between">
-                <span className="truncate text-2xl font-bold sm:text-3xl">
-                  {participantLabel(config, p.id)}
+                <span className="flex min-w-0 items-center gap-1.5">
+                  <span className="truncate text-2xl font-bold sm:text-3xl">
+                    {participantLabel(config, p.id)}
+                  </span>
+                  {p.id === legStarterId && (
+                    <span
+                      className="shrink-0 text-base text-[var(--color-text-mute)]"
+                      title={t('game.startsLegTitle')}
+                      aria-label={t('game.startsLegTitle')}
+                    >
+                      ★
+                    </span>
+                  )}
                 </span>
                 <span className="shrink-0 text-xl font-bold text-[var(--color-accent)] sm:text-2xl">
                   ● {legsWon[p.id] ?? 0}

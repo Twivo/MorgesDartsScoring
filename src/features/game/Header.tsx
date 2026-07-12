@@ -6,11 +6,10 @@ import { useT } from '@/store/LangContext';
 export function Header() {
   const { config, state, saveStatus } = useGame();
   const { t } = useT();
-  const { activeParticipantId, activePlayerId, legStarterId } = state;
+  const { activeParticipantId, activePlayerId } = state;
 
   const isDouble = config.mode === 'DOUBLE';
   const legNumber = state.currentLegIndex + 1;
-  const activeStartsLeg = activeParticipantId === legStarterId;
 
   return (
     <header className="flex shrink-0 items-center justify-between border-b border-[var(--color-border)] bg-[var(--color-surface)] px-3 py-1.5 text-sm">
@@ -21,15 +20,6 @@ export function Header() {
         <span className="text-3xl font-black sm:text-4xl">
           {playerName(config, activePlayerId)}
         </span>
-        {activeStartsLeg && (
-          <span
-            className="self-center text-base text-[var(--color-text-mute)]"
-            title={t('game.startsLegTitle')}
-            aria-label={t('game.startsLegTitle')}
-          >
-            ★
-          </span>
-        )}
         {isDouble && (
           <span className="rounded bg-[var(--color-accent)] px-2 py-0.5 text-base font-bold text-white">
             {participantLabel(config, activeParticipantId)}
