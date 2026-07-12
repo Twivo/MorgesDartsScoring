@@ -20,6 +20,7 @@ Ouvrir **SQL Editor** dans Supabase, puis executer les fichiers de
 3. `0003_championship.sql`
 4. `0004_live_and_lock.sql`
 5. `0005_training_flag.sql`
+6. `0006_team_accounts.sql`
 
 Ces migrations creent notamment:
 
@@ -31,6 +32,7 @@ Ces migrations creent notamment:
 - les rencontres de championnat;
 - les colonnes de verrouillage de scoring;
 - le flag genere `is_training`;
+- les comptes d'equipe (capitaines) et les policies RLS scopees;
 - les policies RLS.
 
 Optionnel: executer `supabase/seed_gdl_2025-2026.sql` si vous voulez charger
@@ -46,6 +48,30 @@ Dans Supabase:
    **Authentication > Providers > Email**.
 
 L'application suppose un usage simple avec un compte organisateur/admin.
+
+Regle importante: **un compte connecte qui n'est pas capitaine est traite
+comme admin**. C'est ce qui permet a ce compte cree ici d'avoir tous les
+droits sans configuration supplementaire. Gardez donc les inscriptions
+publiques desactivees.
+
+## 3bis. Creer les comptes capitaines (un par equipe)
+
+Chaque equipe peut avoir **un seul compte generique** (le capitaine) qui gere
+uniquement son equipe. Procedure:
+
+1. Dans **Authentication > Users**, creer un compte email + mot de passe pour
+   l'equipe (ex. `capitaine.lesfleches@club.ch`). Ce sont des identifiants
+   partages au sein de l'equipe.
+2. Se connecter a l'application avec le **compte admin**.
+3. Aller dans **Statistiques > Equipes**, deplier l'equipe concernee, et dans
+   **Compte capitaine** saisir l'e-mail du compte cree, puis **Associer**.
+
+Le capitaine se connecte ensuite via le meme ecran de connexion; il est
+automatiquement dirige vers son **espace equipe** (`/team`).
+
+Cote base, l'association email -> equipe passe par des fonctions SQL
+`admin_assign_captain` / `admin_unassign_captain` (reservees a l'admin), car la
+cle anon du frontend ne peut pas lire `auth.users` directement.
 
 ## 4. Configurer l'application
 
@@ -67,10 +93,22 @@ Apres configuration:
 - un visiteur non connecte peut creer/scorer un match d'entrainement;
 - un visiteur non connecte ne peut pas gerer joueurs, equipes ou saisons;
 - un visiteur non connecte ne peut pas creer/scorer une rencontre championnat;
-- un admin connecte peut gerer les donnees de championnat;
+- un admin connecte peut gerer toutes les donnees de championnat;
+- un **capitaine** connecte peut, **pour son equipe uniquement**:
+  - gerer l'effectif (creer un joueur, ajouter/retirer un joueur de l'equipe);
+  - creer et scorer une rencontre impliquant son equipe (contre n'importe quelle
+    autre equipe);
+  - consulter l'historique et les statistiques de ses joueurs;
+- un capitaine **ne peut pas** modifier une autre equipe, scorer une rencontre
+  entre deux autres equipes, ni supprimer des matchs;
+- la lecture reste publique (l'ecran live et les statistiques en dependent):
+  le cloisonnement par equipe est un filtrage d'affichage cote capitaine, tandis
+  que l'**ecriture** est verrouillee cote base;
 - seul un admin connecte peut supprimer des matchs.
 
 Ces regles sont enforcees cote base par RLS, pas seulement par l'interface.
+Le scoping capitaine repose sur la table `team_accounts` et les fonctions
+`current_is_admin()` / `current_team_id()`.
 
 ## 6. Variables pour GitHub Pages
 

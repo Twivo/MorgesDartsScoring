@@ -27,6 +27,7 @@ const DICT: Record<string, { en: string; fr: string }> = {
   'home.live': { en: '📺 Watch live', fr: '📺 En direct' },
   'home.tv': { en: '📺 Club TV mode', fr: '📺 Mode TV du club' },
   'home.admin': { en: 'Statistics', fr: 'Statistiques' },
+  'home.team': { en: '👥 My team space', fr: '👥 Espace de mon équipe' },
   'home.resume': { en: 'Resume →', fr: 'Reprendre →' },
   'home.gameInProgress': { en: 'Game in progress', fr: 'Partie en cours' },
   'home.gamesInProgress': { en: 'games in progress', fr: 'parties en cours' },
@@ -250,7 +251,15 @@ const DICT: Record<string, { en: string; fr: string }> = {
   'admin.seasonReview': { en: 'Season review', fr: 'Bilan de saison' },
   'admin.signOut': { en: 'Sign out', fr: 'Déconnexion' },
   'admin.season': { en: 'Season', fr: 'Saison' },
-  'admin.signInTitle': { en: 'Statistics sign in', fr: 'Connexion statistiques' },
+  'admin.signInTitle': { en: 'Sign in', fr: 'Connexion' },
+  'admin.captainAccount': { en: 'Captain account', fr: 'Compte capitaine' },
+  'admin.captainAssign': { en: 'Assign', fr: 'Associer' },
+  'admin.captainRemove': { en: 'Remove account', fr: 'Retirer le compte' },
+  'admin.captainEmailPlaceholder': { en: 'captain login email', fr: 'e-mail du compte capitaine' },
+  'admin.captainHint': {
+    en: 'Create the account in Supabase (Authentication → Users), then bind it here by email. That login manages only this team.',
+    fr: 'Créez le compte dans Supabase (Authentication → Users), puis associez-le ici par e-mail. Ce compte ne gère que cette équipe.',
+  },
   'admin.signIn': { en: 'Sign in', fr: 'Se connecter' },
   'admin.signingIn': { en: 'Signing in…', fr: 'Connexion…' },
   'admin.signInFailed': { en: 'Sign-in failed', fr: 'Échec de connexion' },
@@ -400,6 +409,42 @@ const DICT: Record<string, { en: string; fr: string }> = {
   'encounterSetup.noTeams': { en: 'No teams yet — create them under Statistics → Teams.', fr: 'Aucune équipe — créez-en dans Statistiques → Équipes.' },
   'encounterSetup.creating': { en: 'Creating…', fr: 'Création…' },
   'encounterSetup.composeFirst': { en: 'Compose first singles →', fr: 'Composer les premiers simples →' },
+  'team.title': { en: 'My team', fr: 'Mon équipe' },
+  'team.noTeamAssigned': {
+    en: 'This account is not linked to a team yet. Ask the organizer to assign it.',
+    fr: 'Ce compte n’est pas encore associé à une équipe. Demandez à l’organisateur de l’associer.',
+  },
+  'team.squad': { en: 'My squad', fr: 'Mon effectif' },
+  'team.newEncounter': { en: 'New match', fr: 'Nouveau match' },
+  'team.history': { en: 'History', fr: 'Historique' },
+  'team.stats': { en: 'Stats', fr: 'Statistiques' },
+  'team.mySquad': { en: 'Squad', fr: 'Effectif' },
+  'team.noMembers': {
+    en: 'No players in your squad yet — add some above.',
+    fr: 'Aucun joueur dans votre effectif — ajoutez-en ci-dessus.',
+  },
+  'team.newPlayerName': { en: 'New player name', fr: 'Nom du nouveau joueur' },
+  'team.createAndAdd': { en: '+ Create', fr: '+ Créer' },
+  'team.addExisting': { en: 'Add a player', fr: 'Ajouter un joueur' },
+  'team.remove': { en: 'Remove', fr: 'Retirer' },
+  'team.removeMemberTitle': { en: 'Remove {name} from the squad?', fr: 'Retirer {name} de l’effectif ?' },
+  'team.removeMemberMessage': {
+    en: 'The player stays in the club and keeps their history — they are only removed from your squad.',
+    fr: 'Le joueur reste dans le club et conserve son historique — il est seulement retiré de votre effectif.',
+  },
+  'team.pickOpponent': { en: 'Pick an opponent.', fr: 'Choisissez un adversaire.' },
+  'team.needFourOwn': {
+    en: 'Your squad needs at least 4 players (add them under My squad).',
+    fr: 'Votre effectif doit compter au moins 4 joueurs (ajoutez-les dans Mon effectif).',
+  },
+  'team.noOpponents': {
+    en: 'No other team to play against yet.',
+    fr: 'Aucune autre équipe disponible pour le moment.',
+  },
+  'team.noEncounters': {
+    en: 'No championship match played yet.',
+    fr: 'Aucun match de championnat joué pour le moment.',
+  },
 };
 
 interface LangValue {

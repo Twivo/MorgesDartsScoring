@@ -14,6 +14,11 @@ import { SeasonReview } from './features/admin/SeasonReview';
 import { RequireAuth } from './features/admin/RequireAuth';
 import { EncounterSetup } from './features/championship/EncounterSetup';
 import { ChampionshipRoute } from './features/championship/ChampionshipRoute';
+import { TeamLayout } from './features/team/TeamLayout';
+import { TeamSquad } from './features/team/TeamSquad';
+import { TeamEncounterSetup } from './features/team/TeamEncounterSetup';
+import { TeamHistory } from './features/team/TeamHistory';
+import { TeamStats } from './features/team/TeamStats';
 
 export function App() {
   return (
@@ -44,6 +49,16 @@ export function App() {
             </RequireAuth>
           }
         />
+
+        {/* Team space — one login per team (captain), gated inside TeamLayout */}
+        <Route path="/team" element={<TeamLayout />}>
+          <Route index element={<Navigate to="/team/squad" replace />} />
+          <Route path="squad" element={<TeamSquad />} />
+          <Route path="new" element={<TeamEncounterSetup />} />
+          <Route path="history" element={<TeamHistory />} />
+          <Route path="stats" element={<TeamStats />} />
+          <Route path="players/:id" element={<PlayerProfile />} />
+        </Route>
 
         {/* Admin — fully gated by RequireAuth inside AdminLayout */}
         <Route path="/admin" element={<AdminLayout />}>

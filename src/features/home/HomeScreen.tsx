@@ -181,6 +181,15 @@ export function HomeScreen() {
         variant="surface"
         size="lg"
         fullWidth
+        onClick={() => navigate('/team')}
+      >
+        {t('home.team')}
+      </Button>
+
+      <Button
+        variant="surface"
+        size="lg"
+        fullWidth
         onClick={() => navigate('/admin/stats')}
       >
         {t('home.admin')}
