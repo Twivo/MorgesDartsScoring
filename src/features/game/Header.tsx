@@ -24,15 +24,15 @@ export function Header() {
         key={activePlayerId}
         className="animate-player-switch flex items-baseline gap-2 truncate"
       >
-        <span className="text-2xl font-black sm:text-3xl">
+        <span className="text-3xl font-black sm:text-4xl">
           {playerName(config, activePlayerId)}
         </span>
         {isDouble && (
-          <span className="rounded bg-[var(--color-accent)] px-2 py-0.5 text-sm font-bold text-white">
+          <span className="rounded bg-[var(--color-accent)] px-2 py-0.5 text-base font-bold text-white">
             {participantLabel(config, activeParticipantId)}
           </span>
         )}
-        <span className="text-base text-[var(--color-text-dim)]">{t('game.toThrowSuffix')}</span>
+        <span className="text-lg text-[var(--color-text-dim)]">{t('game.toThrowSuffix')}</span>
       </div>
 
       {saveStatus !== 'saved' && (
@@ -61,7 +61,7 @@ export function Header() {
         </span>
       )}
 
-      <div className="shrink-0 text-right text-base text-[var(--color-text-dim)]">
+      <div className="shrink-0 text-right text-lg text-[var(--color-text-dim)]">
         <span className="font-semibold text-[var(--color-accent)]">
           {t('game.leg')} {legNumber}
         </span>{' '}

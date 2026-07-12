@@ -205,7 +205,7 @@ export function GameScreen({
       )}
     >
       {/* top control bar (compact single line) */}
-      <div className="flex shrink-0 items-center justify-between border-b border-[var(--color-border)] bg-[var(--color-surface)] px-2 py-1 text-base">
+      <div className="flex shrink-0 items-center justify-between border-b border-[var(--color-border)] bg-[var(--color-surface)] px-2 py-1 text-lg">
         <button
           onClick={() => navigate('/')}
           className="rounded-md px-3 py-1.5 font-semibold text-[var(--color-text-dim)] hover:bg-[var(--color-surface-2)]"
@@ -251,7 +251,7 @@ export function GameScreen({
         </div>
 
         {/* keypad — finish long-press is integrated into the 1/2/3 keys */}
-        <div className="shrink-0 border-t border-[var(--color-border)] lg:flex lg:w-[540px] lg:flex-col lg:justify-center lg:border-l lg:border-t-0">
+        <div className="shrink-0 border-t border-[var(--color-border)] lg:flex lg:w-[620px] lg:flex-col lg:justify-center lg:border-l lg:border-t-0">
           <Keypad
             buffer={buffer}
             remainingBefore={remainingBefore}

@@ -42,17 +42,17 @@ export function ScoreBoard({
               )}
             >
               <div className="flex items-center justify-between">
-                <span className="truncate text-xl font-bold sm:text-2xl">
+                <span className="truncate text-2xl font-bold sm:text-3xl">
                   {participantLabel(config, p.id)}
                 </span>
-                <span className="shrink-0 text-lg font-bold text-[var(--color-accent)] sm:text-xl">
+                <span className="shrink-0 text-xl font-bold text-[var(--color-accent)] sm:text-2xl">
                   ● {legsWon[p.id] ?? 0}
                 </span>
               </div>
-              <div className="text-6xl font-black tnum leading-none sm:text-7xl">
+              <div className="text-7xl font-black tnum leading-none sm:text-8xl">
                 {remaining[p.id] ?? 0}
               </div>
-              <div className="mt-1 flex items-center gap-2 text-base text-[var(--color-text-dim)]">
+              <div className="mt-1 flex items-center gap-2 text-lg text-[var(--color-text-dim)]">
                 <span>{t('game.avg')} {s ? s.average3.toFixed(1) : '0.0'}</span>
                 <span className="text-[var(--color-text-mute)]">·</span>
                 <span>{s ? s.totalDarts : 0} {t('game.darts')}</span>
@@ -71,12 +71,12 @@ export function ScoreBoard({
             : 'border-transparent',
         )}
       >
-        <div className="text-sm uppercase tracking-wide text-[var(--color-text-dim)]">
+        <div className="text-base uppercase tracking-wide text-[var(--color-text-dim)]">
           {hasInput ? t('game.remainingTap') : t('game.remaining')}
         </div>
         <div
           className={cn(
-            'font-black tnum leading-none text-7xl sm:text-8xl lg:text-[128px]',
+            'font-black tnum leading-none text-8xl sm:text-9xl lg:text-[168px]',
             error
               ? 'text-[var(--color-accent)]'
               : hasInput
@@ -86,7 +86,7 @@ export function ScoreBoard({
         >
           {liveRemaining}
         </div>
-        <div className="mt-1 h-6 text-base font-semibold">
+        <div className="mt-1 h-7 text-lg font-semibold">
           {error ? (
             <span className="text-[var(--color-accent)]">{error}</span>
           ) : (
