@@ -153,6 +153,7 @@ const DICT: Record<string, { en: string; fr: string }> = {
   'game.savingTitle': { en: 'Saving to the database…', fr: 'Enregistrement en base…' },
   'game.offlineRetrying': { en: 'Offline — retrying', fr: 'Hors ligne — nouvelle tentative' },
   'game.starts': { en: '{starter} starts', fr: '{starter} commence' },
+  'game.startsLegTitle': { en: 'Starts this leg', fr: 'Commence ce leg' },
   'game.shortInfo': { en: '{variant} DO · first to {legs}', fr: '{variant} DO · premier à {legs}' },
   'validation.scoreRange': { en: 'Score must be between 0 and 180.', fr: 'Le score doit être compris entre 0 et 180.' },
   'validation.impossible': { en: 'Impossible score with three darts.', fr: 'Score impossible avec trois fléchettes.' },

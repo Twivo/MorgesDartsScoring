@@ -10,13 +10,7 @@ export function Header() {
 
   const isDouble = config.mode === 'DOUBLE';
   const legNumber = state.currentLegIndex + 1;
-  const starterName = isDouble
-    ? participantLabel(config, legStarterId)
-    : playerName(
-        config,
-        config.participants.find((p) => p.id === legStarterId)?.playerIds[0] ??
-          '',
-      );
+  const activeStartsLeg = activeParticipantId === legStarterId;
 
   return (
     <header className="flex shrink-0 items-center justify-between border-b border-[var(--color-border)] bg-[var(--color-surface)] px-3 py-1.5 text-sm">
@@ -27,6 +21,15 @@ export function Header() {
         <span className="text-3xl font-black sm:text-4xl">
           {playerName(config, activePlayerId)}
         </span>
+        {activeStartsLeg && (
+          <span
+            className="self-center text-base text-[var(--color-text-mute)]"
+            title={t('game.startsLegTitle')}
+            aria-label={t('game.startsLegTitle')}
+          >
+            ★
+          </span>
+        )}
         {isDouble && (
           <span className="rounded bg-[var(--color-accent)] px-2 py-0.5 text-base font-bold text-white">
             {participantLabel(config, activeParticipantId)}
@@ -64,8 +67,7 @@ export function Header() {
       <div className="shrink-0 text-right text-lg text-[var(--color-text-dim)]">
         <span className="font-semibold text-[var(--color-accent)]">
           {t('game.leg')} {legNumber}
-        </span>{' '}
-        · {t('game.starts').replace('{starter}', starterName)}
+        </span>
         <span className="ml-1 hidden sm:inline">
           · {t('game.shortInfo')
             .replace('{variant}', String(config.variant))
