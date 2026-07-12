@@ -61,7 +61,7 @@ export function Keypad({
   return (
     <div className="select-none px-2 pb-1 pt-1">
       {/* keypad input preview / finish hint */}
-      <div className="mb-1.5 flex h-12 items-center justify-center rounded-lg bg-[var(--color-surface)] px-3">
+      <div className="mb-1 flex h-10 items-center justify-center rounded-lg bg-[var(--color-surface)] px-3">
         {hasInput ? (
           <span className="text-4xl font-black tnum tracking-wider">{buffer}</span>
         ) : onFinish ? (
@@ -98,22 +98,22 @@ export function Keypad({
                 label={d}
                 onClick={() => onDigit(d)}
                 disabled={disabled}
-                className="h-16 sm:h-20"
+                className="h-14 sm:h-16"
               />
             ),
           )}
-          <PlainKey label="0" onClick={() => onDigit('0')} disabled={disabled} className="h-16 sm:h-20" />
+          <PlainKey label="0" onClick={() => onDigit('0')} disabled={disabled} className="h-14 sm:h-16" />
           <PlainKey
             label="⌫"
             onClick={onBackspace}
             disabled={disabled}
-            className="h-16 text-[var(--color-text-dim)] sm:h-20"
+            className="h-14 text-[var(--color-text-dim)] sm:h-16"
           />
           <PlainKey
             label="✓"
             onClick={onCommit}
             disabled={disabled}
-            className="h-16 bg-[var(--color-accent)] text-white active:bg-[var(--color-accent-hover)] sm:h-20"
+            className="h-14 bg-[var(--color-accent)] text-white active:bg-[var(--color-accent-hover)] sm:h-16"
           />
         </div>
 
@@ -131,7 +131,7 @@ export function Keypad({
           <button
             onClick={onMiss}
             disabled={disabled}
-            className="flex-1 rounded-xl border border-[var(--color-border-strong)] bg-[var(--color-surface-2)] py-4 text-2xl font-black transition-all active:scale-95 disabled:opacity-40"
+            className="flex-1 rounded-xl border border-[var(--color-border-strong)] bg-[var(--color-surface-2)] py-3 text-2xl font-black transition-all active:scale-95 disabled:opacity-40"
           >
             {t('game.miss')}
           </button>
@@ -141,7 +141,7 @@ export function Keypad({
               key={v}
               onClick={() => onQuickScore(v)}
               disabled={disabled}
-              className="flex-1 rounded-xl bg-[var(--color-surface-2)] py-4 text-2xl font-black transition-all active:scale-95 disabled:opacity-40"
+              className="flex-1 rounded-xl bg-[var(--color-surface-2)] py-3 text-2xl font-black transition-all active:scale-95 disabled:opacity-40"
             >
               {v}
             </button>
@@ -151,7 +151,7 @@ export function Keypad({
           <button
             onClick={onBust}
             disabled={disabled}
-            className="flex-[1.2] rounded-xl border-2 border-[var(--color-accent)] bg-[var(--color-accent-soft)] py-4 text-2xl font-black text-[var(--color-accent-hover)] transition-all active:scale-95 disabled:opacity-40"
+            className="flex-[1.2] rounded-xl border-2 border-[var(--color-accent)] bg-[var(--color-accent-soft)] py-3 text-2xl font-black text-[var(--color-accent-hover)] transition-all active:scale-95 disabled:opacity-40"
           >
             {t('game.bust')}
           </button>
@@ -162,7 +162,7 @@ export function Keypad({
       <button
         onClick={onCommit}
         disabled={disabled || !hasInput}
-        className="mt-1.5 w-full rounded-2xl bg-white py-5 text-3xl font-black text-black transition-all active:scale-[0.99] disabled:opacity-30"
+        className="mt-1.5 w-full rounded-2xl bg-white py-4 text-3xl font-black text-black transition-all active:scale-[0.99] disabled:opacity-30"
       >
         {t('game.validate').toUpperCase()}
       </button>
@@ -216,7 +216,7 @@ function FinishKey({
     <button
       {...handlers}
       disabled={disabled}
-      className="relative flex h-16 items-center justify-center rounded-xl bg-[var(--color-success)] text-3xl font-black text-white transition-all active:scale-95 disabled:opacity-40 sm:h-20"
+      className="relative flex h-14 items-center justify-center rounded-xl bg-[var(--color-success)] text-3xl font-black text-white transition-all active:scale-95 disabled:opacity-40 sm:h-16"
     >
       {digit}
       <span className="absolute bottom-1 text-xs font-semibold uppercase opacity-80">
