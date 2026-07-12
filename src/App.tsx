@@ -52,7 +52,7 @@ export function App() {
 
         {/* Team space — one login per team (captain), gated inside TeamLayout */}
         <Route path="/team" element={<TeamLayout />}>
-          <Route index element={<Navigate to="/team/squad" replace />} />
+          <Route index element={<Navigate to="/team/new" replace />} />
           <Route path="squad" element={<TeamSquad />} />
           <Route path="new" element={<TeamEncounterSetup />} />
           <Route path="history" element={<TeamHistory />} />

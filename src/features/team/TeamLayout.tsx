@@ -23,10 +23,10 @@ export function useMyTeam(): TeamOutlet {
 }
 
 const NAV = [
-  { to: '/team/squad', labelKey: 'team.squad' },
   { to: '/team/new', labelKey: 'team.newEncounter' },
   { to: '/team/history', labelKey: 'team.history' },
   { to: '/team/stats', labelKey: 'team.stats' },
+  { to: '/team/squad', labelKey: 'team.squad' },
 ];
 
 /** Team (captain) shell — mirrors the admin layout, scoped to one team. */

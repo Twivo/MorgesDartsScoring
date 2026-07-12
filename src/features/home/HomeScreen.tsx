@@ -157,7 +157,7 @@ export function HomeScreen() {
         variant="surface"
         size="xl"
         fullWidth
-        onClick={() => navigate('/championship/new')}
+        onClick={() => navigate('/team')}
       >
         {t('home.championship')}
       </Button>
@@ -175,15 +175,6 @@ export function HomeScreen() {
             {liveCount}
           </span>
         )}
-      </Button>
-
-      <Button
-        variant="surface"
-        size="lg"
-        fullWidth
-        onClick={() => navigate('/team')}
-      >
-        {t('home.team')}
       </Button>
 
       <Button
