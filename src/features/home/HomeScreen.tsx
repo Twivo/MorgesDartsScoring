@@ -8,6 +8,7 @@ import { listResumable } from '@/store/matchService';
 import { listResumableEncounters } from '@/store/encounterService';
 import { listLiveMatches } from '@/store/liveMatch';
 import { useT, LangToggle } from '@/store/LangContext';
+import { useAuth } from '@/store/AuthContext';
 import { participantLabel } from '@/domain/presentation';
 import type { EncounterRecord, MatchRecord } from '@/data/types';
 
@@ -19,6 +20,7 @@ const CELEBRATION_RULE_KEYS = Array.from(
 export function HomeScreen() {
   const navigate = useNavigate();
   const { t } = useT();
+  const { isCaptain } = useAuth();
   const [resumable, setResumable] = useState<MatchRecord[]>([]);
   const [encounters, setEncounters] = useState<EncounterRecord[]>([]);
   const [loaded, setLoaded] = useState(false);
@@ -181,7 +183,7 @@ export function HomeScreen() {
         variant="surface"
         size="lg"
         fullWidth
-        onClick={() => navigate('/admin/stats')}
+        onClick={() => navigate(isCaptain ? '/team/stats' : '/admin/players')}
       >
         {t('home.admin')}
       </Button>
