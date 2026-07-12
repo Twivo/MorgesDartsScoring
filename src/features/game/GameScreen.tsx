@@ -251,7 +251,7 @@ export function GameScreen({
         </div>
 
         {/* keypad — finish long-press is integrated into the 1/2/3 keys */}
-        <div className="shrink-0 border-t border-[var(--color-border)] lg:flex lg:w-[620px] lg:flex-col lg:justify-center lg:border-l lg:border-t-0">
+        <div className="shrink-0 border-t border-[var(--color-border)] lg:flex lg:w-[520px] lg:flex-col lg:justify-center lg:border-l lg:border-t-0">
           <Keypad
             buffer={buffer}
             remainingBefore={remainingBefore}

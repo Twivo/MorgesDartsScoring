@@ -52,7 +52,7 @@ export function Keypad({
     <button
       onClick={() => onQuickScore(value)}
       disabled={disabled}
-      className="flex-1 rounded-lg bg-[var(--color-surface)] text-3xl font-bold text-[var(--color-text-dim)] transition-all active:scale-95 hover:text-[var(--color-text)] disabled:opacity-40"
+      className="flex-1 rounded-lg bg-[var(--color-surface)] text-2xl font-bold text-[var(--color-text-dim)] transition-all active:scale-95 hover:text-[var(--color-text)] disabled:opacity-40"
     >
       {value}
     </button>
@@ -61,28 +61,28 @@ export function Keypad({
   return (
     <div className="select-none px-2 pb-1 pt-1">
       {/* keypad input preview / finish hint */}
-      <div className="mb-2 flex h-16 items-center justify-center rounded-lg bg-[var(--color-surface)] px-3">
+      <div className="mb-1.5 flex h-12 items-center justify-center rounded-lg bg-[var(--color-surface)] px-3">
         {hasInput ? (
-          <span className="text-5xl font-black tnum tracking-wider">{buffer}</span>
+          <span className="text-4xl font-black tnum tracking-wider">{buffer}</span>
         ) : onFinish ? (
-          <span className="text-xl font-semibold text-[var(--color-success)]">
+          <span className="text-lg font-semibold text-[var(--color-success)]">
             {t('game.finishHint')}
           </span>
         ) : (
-          <span className="text-xl text-[var(--color-text-mute)]">{t('game.typeScore')}</span>
+          <span className="text-lg text-[var(--color-text-mute)]">{t('game.typeScore')}</span>
         )}
       </div>
 
-      <div className="flex gap-2">
+      <div className="flex gap-1.5">
         {/* left quick column */}
-        <div className="flex w-20 flex-col gap-2 sm:w-24">
+        <div className="flex w-16 flex-col gap-1.5 sm:w-20">
           {QUICK_LEFT.map((v) => (
             <Quick key={v} value={v} />
           ))}
         </div>
 
         {/* numpad */}
-        <div className="grid flex-1 grid-cols-3 gap-2">
+        <div className="grid flex-1 grid-cols-3 gap-1.5">
           {DIGITS.map((d) =>
             isFinishKey(d) ? (
               <FinishKey
@@ -98,27 +98,27 @@ export function Keypad({
                 label={d}
                 onClick={() => onDigit(d)}
                 disabled={disabled}
-                className="h-20 sm:h-24"
+                className="h-16 sm:h-20"
               />
             ),
           )}
-          <PlainKey label="0" onClick={() => onDigit('0')} disabled={disabled} className="h-20 sm:h-24" />
+          <PlainKey label="0" onClick={() => onDigit('0')} disabled={disabled} className="h-16 sm:h-20" />
           <PlainKey
             label="⌫"
             onClick={onBackspace}
             disabled={disabled}
-            className="h-20 text-[var(--color-text-dim)] sm:h-24"
+            className="h-16 text-[var(--color-text-dim)] sm:h-20"
           />
           <PlainKey
             label="✓"
             onClick={onCommit}
             disabled={disabled}
-            className="h-20 bg-[var(--color-accent)] text-white active:bg-[var(--color-accent-hover)] sm:h-24"
+            className="h-16 bg-[var(--color-accent)] text-white active:bg-[var(--color-accent-hover)] sm:h-20"
           />
         </div>
 
         {/* right quick column */}
-        <div className="flex w-20 flex-col gap-2 sm:w-24">
+        <div className="flex w-16 flex-col gap-1.5 sm:w-20">
           {QUICK_RIGHT.map((v) => (
             <Quick key={v} value={v} />
           ))}
@@ -126,12 +126,12 @@ export function Keypad({
       </div>
 
       {/* bottom row */}
-      <div className="mt-2 flex gap-2">
+      <div className="mt-1.5 flex gap-1.5">
         {onFinish ? (
           <button
             onClick={onMiss}
             disabled={disabled}
-            className="flex-1 rounded-xl border border-[var(--color-border-strong)] bg-[var(--color-surface-2)] py-5 text-3xl font-black transition-all active:scale-95 disabled:opacity-40"
+            className="flex-1 rounded-xl border border-[var(--color-border-strong)] bg-[var(--color-surface-2)] py-4 text-2xl font-black transition-all active:scale-95 disabled:opacity-40"
           >
             {t('game.miss')}
           </button>
@@ -141,7 +141,7 @@ export function Keypad({
               key={v}
               onClick={() => onQuickScore(v)}
               disabled={disabled}
-              className="flex-1 rounded-xl bg-[var(--color-surface-2)] py-5 text-3xl font-black transition-all active:scale-95 disabled:opacity-40"
+              className="flex-1 rounded-xl bg-[var(--color-surface-2)] py-4 text-2xl font-black transition-all active:scale-95 disabled:opacity-40"
             >
               {v}
             </button>
@@ -151,7 +151,7 @@ export function Keypad({
           <button
             onClick={onBust}
             disabled={disabled}
-            className="flex-[1.2] rounded-xl border-2 border-[var(--color-accent)] bg-[var(--color-accent-soft)] py-5 text-3xl font-black text-[var(--color-accent-hover)] transition-all active:scale-95 disabled:opacity-40"
+            className="flex-[1.2] rounded-xl border-2 border-[var(--color-accent)] bg-[var(--color-accent-soft)] py-4 text-2xl font-black text-[var(--color-accent-hover)] transition-all active:scale-95 disabled:opacity-40"
           >
             {t('game.bust')}
           </button>
@@ -162,7 +162,7 @@ export function Keypad({
       <button
         onClick={onCommit}
         disabled={disabled || !hasInput}
-        className="mt-2 w-full rounded-2xl bg-white py-6 text-4xl font-black text-black transition-all active:scale-[0.99] disabled:opacity-30"
+        className="mt-1.5 w-full rounded-2xl bg-white py-5 text-3xl font-black text-black transition-all active:scale-[0.99] disabled:opacity-30"
       >
         {t('game.validate').toUpperCase()}
       </button>
@@ -186,7 +186,7 @@ function PlainKey({
       onClick={onClick}
       disabled={disabled}
       className={cn(
-        'flex items-center justify-center rounded-xl bg-[var(--color-surface-2)] text-4xl font-bold transition-all active:scale-95 active:bg-[var(--color-surface-3)] disabled:opacity-40',
+        'flex items-center justify-center rounded-xl bg-[var(--color-surface-2)] text-3xl font-bold transition-all active:scale-95 active:bg-[var(--color-surface-3)] disabled:opacity-40',
         className,
       )}
     >
@@ -216,7 +216,7 @@ function FinishKey({
     <button
       {...handlers}
       disabled={disabled}
-      className="relative flex h-20 items-center justify-center rounded-xl bg-[var(--color-success)] text-4xl font-black text-white transition-all active:scale-95 disabled:opacity-40 sm:h-24"
+      className="relative flex h-16 items-center justify-center rounded-xl bg-[var(--color-success)] text-3xl font-black text-white transition-all active:scale-95 disabled:opacity-40 sm:h-20"
     >
       {digit}
       <span className="absolute bottom-1 text-xs font-semibold uppercase opacity-80">
