@@ -47,21 +47,26 @@ elle peut etre reprise depuis l'accueil.
 
 ## 4. Saisir les scores pendant un match
 
-Pendant un match, l'ecran montre:
+L'ecran de scoring utilise de gros chiffres pour rester lisible depuis le board,
+a environ 3 metres. Il montre:
 
-- le joueur qui doit lancer;
-- les scores restants;
+- le joueur qui doit lancer, en grand, avec une petite etoile a cote du nom quand
+  ce joueur commence le leg;
+- les scores restants des deux joueurs, en grand;
+- le score restant du joueur actif en tres grand au centre, qui diminue en direct
+  pendant la saisie;
 - le clavier de saisie;
-- l'historique des visites;
+- l'historique des dernieres visites, une colonne par joueur;
 - les actions utiles comme undo, bust ou forfait.
 
 Pour saisir une visite:
 
 1. Taper le score marque.
-2. Appuyer sur `Valider`.
+2. Appuyer sur `Valider` (ou toucher le grand score central).
 3. L'application passe automatiquement au joueur suivant.
 
-Les boutons de scores rapides valident directement certains scores frequents.
+Les colonnes de scores rapides autour du clavier, ainsi que les boutons `140` et
+`180`, valident directement certains scores frequents.
 
 ## 5. Bust, miss et checkout
 

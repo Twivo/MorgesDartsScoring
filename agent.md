@@ -104,6 +104,11 @@ npm audit --json
   explicite.
 - Conserver les formats de `MatchRecord`, `GameEvent`, equipes, saisons et
   rencontres.
+- L'ecran de scoring privilegie la lisibilite a distance (environ 3 m): gros
+  chiffres pour les scores restants et le score central du joueur actif. Garder
+  le clavier plus compact que les scores pour laisser voir l'historique.
+- Le joueur qui commence le leg est signale par une petite etoile discrete a cote
+  du nom du joueur actif, pas par du texte dans la ligne d'info.
 
 ## Championnat
 

@@ -48,13 +48,21 @@ Donnees recommandees:
 
 ## 3. Scoring match
 
+- [ ] Les chiffres sont assez gros pour etre lus depuis le board (environ 3 m):
+      scores des deux joueurs et grand score central du joueur actif.
+- [ ] Une etoile discrete apparait a cote du nom quand le joueur actif commence
+      le leg, et disparait quand c'est l'autre joueur qui lance.
 - [ ] Saisir un score valide puis valider.
+- [ ] Le grand score central diminue en direct pendant la saisie.
+- [ ] Toucher le grand score central valide aussi la visite.
 - [ ] Les scores restants, le joueur actif et l'historique se mettent a jour.
-- [ ] Les scores rapides valident immediatement.
+- [ ] Les scores rapides (colonnes laterales, `140` et `180`) valident
+      immediatement.
+- [ ] L'historique montre les dernieres visites de chaque joueur.
 - [ ] Le bouton Bust apparait seulement quand il est pertinent.
 - [ ] Les finishes proposent les choix de flechettes possibles.
 - [ ] Un checkout termine le leg.
-- [ ] Le starter alterne au leg suivant.
+- [ ] Le starter alterne au leg suivant, et l'etoile suit le nouveau starter.
 - [ ] Gagner le nombre de legs requis affiche l'ecran final.
 - [ ] Undo annule la derniere action.
 - [ ] Une visite peut etre modifiee si l'UI le permet.
@@ -163,7 +171,9 @@ Donnees recommandees:
 ## 13. Responsive
 
 - [ ] Mobile portrait: scoring utilisable sans zoom.
-- [ ] Tablette paysage: score et clavier restent lisibles.
+- [ ] Tablette paysage et laptop: score, clavier et historique restent lisibles,
+      et l'historique montre les dernieres visites sans deborder.
+- [ ] Le clavier et le bouton `Valider` restent entierement visibles a l'ecran.
 - [ ] Les textes des boutons ne debordent pas.
 - [ ] Les popups restent accessibles sur petit ecran.
 - [ ] Le logo d'accueil ne masque pas les boutons principaux.
