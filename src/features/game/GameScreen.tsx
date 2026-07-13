@@ -23,6 +23,7 @@ export function GameScreen({
   onGameOver,
   gameOverContent,
   embedded,
+  onConfigure,
 }: {
   /** Championship: called once the match is finished (winner participant id). */
   onGameOver?: (winnerParticipantId: string | undefined) => void;
@@ -30,6 +31,8 @@ export function GameScreen({
   gameOverContent?: React.ReactNode;
   /** Fill the parent instead of the whole viewport (embedded in a wrapper). */
   embedded?: boolean;
+  /** Championship: opens the encounter configuration (button next to Undo). */
+  onConfigure?: () => void;
 } = {}) {
   const navigate = useNavigate();
   const confirm = useConfirm();
@@ -213,6 +216,14 @@ export function GameScreen({
           {t('common.home')}
         </button>
         <div className="flex items-center gap-1">
+          {onConfigure && (
+            <button
+              onClick={onConfigure}
+              className="rounded-md px-3 py-1.5 font-semibold text-[var(--color-text-dim)] hover:bg-[var(--color-surface-2)]"
+            >
+              {t('champ.configure')}
+            </button>
+          )}
           <button
             onClick={undo}
             className="rounded-md px-3 py-1.5 font-semibold hover:bg-[var(--color-surface-2)]"

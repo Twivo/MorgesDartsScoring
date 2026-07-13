@@ -87,7 +87,7 @@ export function ScoreBoard({
         </div>
         <div
           className={cn(
-            'font-black tnum leading-none text-8xl sm:text-9xl lg:text-[168px]',
+            'font-black tnum leading-none text-[120px] sm:text-[156px] lg:text-[204px]',
             error
               ? 'text-[var(--color-accent)]'
               : hasInput

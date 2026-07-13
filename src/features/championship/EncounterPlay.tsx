@@ -19,12 +19,15 @@ export function EncounterPlay({
   onEncounterUpdate,
   onResult,
   onBack,
+  onConfigure,
 }: {
   encounter: EncounterRecord;
   fixture: Fixture;
   onEncounterUpdate: (e: EncounterRecord) => void;
   onResult: (winner: Side) => void;
   onBack: () => void;
+  /** Opens the encounter configuration (shown in the scoring control bar). */
+  onConfigure?: () => void;
 }) {
   const { t } = useT();
   const [match, setMatch] = useState<MatchRecord | null>(null);
@@ -101,6 +104,7 @@ export function EncounterPlay({
     >
       <GameScreen
         embedded
+        onConfigure={onConfigure}
         onGameOver={(winnerId) => {
           if (winnerId === 'A' || winnerId === 'B') onResult(winnerId);
         }}

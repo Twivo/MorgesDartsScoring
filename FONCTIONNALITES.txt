@@ -180,7 +180,10 @@ Les saisies fautives sont bloquées AVANT enregistrement, avec un message clair 
   - Flux automatique : composer → jouer → stats du match → match suivant →
     doubles → derniers simples → écran final.
   - Bull à chaque match + ordre des joueurs en double (voir §5).
-  - Score de la rencontre affiché en permanence (ex. « Jedi's 3 – 2 Ibericos »).
+  - Score de la rencontre affiché entre les matchs (composition, stats, final,
+    ex. « Jedi's 3 – 2 Ibericos »). Pendant le scoring, cette ligne est masquée
+    pour agrandir le score restant ; « ⚙ Configurer » reste accessible dans la
+    barre du haut, à côté d'« Annuler ».
   - ORDRE DES MATCHS 100 % FLEXIBLE : via « Configure encounter », on peut
     déplacer n'importe quel simple ou double à n'importe quelle position, à tout
     moment (utile si un joueur doit partir plus tôt). Les matchs déjà joués ou en

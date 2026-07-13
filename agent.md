@@ -110,6 +110,10 @@ npm audit --json
 - Le joueur qui commence le leg est signale par une petite etoile discrete a cote
   du nom dans sa carte de score, pas par du texte dans la ligne d'info ni dans le
   bandeau du haut.
+- Pendant le scoring d'un match de championnat, le bandeau du score de la
+  rencontre est masque (gain de place pour le score restant central) ; le bouton
+  « Configurer » vit alors dans la barre de controle, a cote de « Annuler ». Le
+  bandeau revient entre les matchs (composition, stats, final).
 
 ## Championnat
 

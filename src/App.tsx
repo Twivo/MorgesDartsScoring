@@ -1,5 +1,6 @@
 import { Navigate, Route, Routes } from 'react-router-dom';
 import { HomeScreen } from './features/home/HomeScreen';
+import { LoginRoute } from './features/home/LoginRoute';
 import { SetupScreen } from './features/setup/SetupScreen';
 import { GameRoute } from './features/game/GameRoute';
 import { LiveList } from './features/live/LiveList';
@@ -25,6 +26,7 @@ export function App() {
     <div className="min-h-full bg-[var(--color-bg)] text-[var(--color-text)]">
       <Routes>
         <Route path="/" element={<HomeScreen />} />
+        <Route path="/login" element={<LoginRoute />} />
         <Route path="/new" element={<SetupScreen />} />
         <Route path="/game/:id" element={<GameRoute />} />
 

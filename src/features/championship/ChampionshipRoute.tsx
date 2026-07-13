@@ -54,6 +54,10 @@ export function ChampionshipRoute() {
 
   const state = buildEncounterState(encounter.plan, encounter.currentIndex);
   const isPlay = state.phase === 'PLAY';
+  // Once the fixture's match is launched, the scoring screen takes the whole
+  // height: the championship scoreboard line is dropped to free vertical space
+  // (Configure moves into the scoring screen's control bar).
+  const isScoring = isPlay && !!state.currentFixture?.matchId;
 
   return (
     <div className="mx-auto flex h-[100dvh] max-w-6xl flex-col bg-[var(--color-bg)]">
@@ -70,11 +74,13 @@ export function ChampionshipRoute() {
         </div>
       )}
 
-      <EncounterHeader
-        encounter={encounter}
-        state={state}
-        onConfigure={() => setConfigOpen(true)}
-      />
+      {!isScoring && (
+        <EncounterHeader
+          encounter={encounter}
+          state={state}
+          onConfigure={() => setConfigOpen(true)}
+        />
+      )}
 
       <div className="flex min-h-0 flex-1 flex-col">
         {state.phase === 'COMPOSE' && state.isDecider && (
@@ -94,6 +100,7 @@ export function ChampionshipRoute() {
             encounter={encounter}
             fixture={state.currentFixture}
             onEncounterUpdate={setEncounter}
+            onConfigure={() => setConfigOpen(true)}
             onBack={() =>
               void unadvanceEncounter(encounter).then(setEncounter)
             }
