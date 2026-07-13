@@ -107,6 +107,17 @@ npm audit --json
 - L'ecran de scoring privilegie la lisibilite a distance (environ 3 m): gros
   chiffres pour les scores restants et le score central du joueur actif. Garder
   le clavier plus compact que les scores pour laisser voir l'historique.
+- Cible materielle: tablette d'au moins 11 pouces. Le scoring tient sans
+  debordement en paysage (deux colonnes, pave a droite) comme en portrait
+  (colonne unique). Sur >= lg, les touches du pave sont agrandies (lg:h-20)
+  pour de meilleures cibles tactiles.
+- Sur ordinateur, le clavier physique pilote la saisie: chiffres 0-9, Entree
+  (valider), Retour arriere (effacer un chiffre), Echap (tout effacer). Un
+  seul ecouteur window keydown, cable via une ref pour rester valide sans se
+  dupliquer; desactive quand une modale (checkout/edition) est ouverte ou une
+  fois le match termine.
+- Le score central en cours de saisie reste en couleur de texte normale; le
+  rouge (accent) est reserve aux saisies INVALIDES (avec le shake).
 - Le joueur qui commence le leg est signale par une petite etoile discrete a cote
   du nom dans sa carte de score, pas par du texte dans la ligne d'info ni dans le
   bandeau du haut.

@@ -45,6 +45,16 @@ export function GameScreen({
   const [editingId, setEditingId] = useState<string | null>(null);
   const firedGameOver = useRef(false);
 
+  // Physical-keyboard support (desktop): the latest input API is stashed in a
+  // ref so a single window listener stays valid across renders. Set to null
+  // once the game is over or a modal owns the keyboard, disabling capture.
+  const keyApi = useRef<{
+    onDigit: (d: string) => void;
+    onBackspace: () => void;
+    onCommit: () => void;
+    onClear: () => void;
+  } | null>(null);
+
   useEffect(() => {
     if (state.status === 'GAME_OVER' && onGameOver && !firedGameOver.current) {
       firedGameOver.current = true;
@@ -52,7 +62,39 @@ export function GameScreen({
     }
   }, [state.status, state.winnerId, onGameOver]);
 
+  useEffect(() => {
+    const onKey = (e: KeyboardEvent) => {
+      const api = keyApi.current;
+      if (!api || e.metaKey || e.ctrlKey || e.altKey) return;
+      const el = e.target as HTMLElement | null;
+      if (
+        el &&
+        (el.tagName === 'INPUT' ||
+          el.tagName === 'TEXTAREA' ||
+          el.isContentEditable)
+      ) {
+        return;
+      }
+      if (e.key >= '0' && e.key <= '9') {
+        e.preventDefault();
+        api.onDigit(e.key);
+      } else if (e.key === 'Backspace') {
+        e.preventDefault();
+        api.onBackspace();
+      } else if (e.key === 'Enter') {
+        e.preventDefault();
+        api.onCommit();
+      } else if (e.key === 'Escape') {
+        e.preventDefault();
+        api.onClear();
+      }
+    };
+    window.addEventListener('keydown', onKey);
+    return () => window.removeEventListener('keydown', onKey);
+  }, []);
+
   if (state.status === 'GAME_OVER') {
+    keyApi.current = null;
     if (onGameOver || gameOverContent) return <>{gameOverContent}</>;
     return <StatsScreen />;
   }
@@ -146,6 +188,18 @@ export function GameScreen({
     if (isRemainingEntry) commitRemaining();
     else commitGross(parsed);
   };
+
+  // Wire the physical keyboard to the live input, but hand control to a modal
+  // (checkout / edit visit) when one is open so it can own the keyboard.
+  keyApi.current =
+    pendingCheckout !== null || editingId !== null
+      ? null
+      : {
+          onDigit,
+          onBackspace,
+          onCommit: commitSmart,
+          onClear: () => setBuffer(''),
+        };
 
   const confirmCheckout = (darts: number) => {
     if (pendingCheckout === null) return;

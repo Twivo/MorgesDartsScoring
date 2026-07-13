@@ -98,22 +98,22 @@ export function Keypad({
                 label={d}
                 onClick={() => onDigit(d)}
                 disabled={disabled}
-                className="h-14 sm:h-16"
+                className="h-14 sm:h-16 lg:h-20"
               />
             ),
           )}
-          <PlainKey label="0" onClick={() => onDigit('0')} disabled={disabled} className="h-14 sm:h-16" />
+          <PlainKey label="0" onClick={() => onDigit('0')} disabled={disabled} className="h-14 sm:h-16 lg:h-20" />
           <PlainKey
             label="⌫"
             onClick={onBackspace}
             disabled={disabled}
-            className="h-14 text-[var(--color-text-dim)] sm:h-16"
+            className="h-14 text-[var(--color-text-dim)] sm:h-16 lg:h-20"
           />
           <PlainKey
             label="✓"
             onClick={onCommit}
             disabled={disabled}
-            className="h-14 bg-[var(--color-accent)] text-white active:bg-[var(--color-accent-hover)] sm:h-16"
+            className="h-14 bg-[var(--color-accent)] text-white active:bg-[var(--color-accent-hover)] sm:h-16 lg:h-20"
           />
         </div>
 
@@ -216,7 +216,7 @@ function FinishKey({
     <button
       {...handlers}
       disabled={disabled}
-      className="relative flex h-14 items-center justify-center rounded-xl bg-[var(--color-success)] text-3xl font-black text-white transition-all active:scale-95 disabled:opacity-40 sm:h-16"
+      className="relative flex h-14 items-center justify-center rounded-xl bg-[var(--color-success)] text-3xl font-black text-white transition-all active:scale-95 disabled:opacity-40 sm:h-16 lg:h-20"
     >
       {digit}
       <span className="absolute bottom-1 text-xs font-semibold uppercase opacity-80">

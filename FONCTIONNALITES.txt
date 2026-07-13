@@ -62,11 +62,16 @@ Deux modes de fonctionnement :
 
 
 ================================================================================
- 3. SAISIE DES SCORES (CLAVIER TACTILE)
+ 3. SAISIE DES SCORES (CLAVIER TACTILE + CLAVIER PHYSIQUE)
 ================================================================================
 
   - Clavier numérique inversé (1 en haut, 9 en bas) pour la prise en main.
-  - Saisie du SCORE marqué à la volée : le restant se met à jour en temps réel.
+  - Sur ordinateur, saisie possible au CLAVIER PHYSIQUE : chiffres 0-9 pour
+    taper, Entrée pour valider, Retour arrière pour effacer un chiffre, Échap
+    pour tout effacer (désactivé quand une fenêtre de fermeture/édition est
+    ouverte).
+  - Saisie du SCORE marqué à la volée : le restant se met à jour en temps réel
+    (en couleur normale ; le rouge est réservé aux saisies invalides).
   - Boutons de scores rapides fréquents (60, 81, 99, 100, 140, 180…).
   - « Finish rapide » : on tape le restant puis on touche le score central pour
     valider la fermeture (sans encadré rouge, saisie fluide).
