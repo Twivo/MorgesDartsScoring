@@ -15,7 +15,9 @@ Depuis l'accueil, les actions principales sont:
 - `En direct`: regarder les matchs en cours.
 - `Statistiques`: acceder a l'administration et aux stats.
 
-Le bouton `FR / EN` en haut de l'accueil change la langue de l'interface.
+Le bouton `FR / EN` en haut de l'accueil change la langue de l'interface. A cote,
+le bouton `Se connecter` / `Se deconnecter` ouvre la page de connexion admin ou
+ferme la session en cours, sans passer par le championnat.
 
 ## 2. Installer l'application sur un appareil
 
@@ -67,6 +69,14 @@ Pour saisir une visite:
 
 Les colonnes de scores rapides autour du clavier, ainsi que les boutons `140` et
 `180`, valident directement certains scores frequents.
+
+Sur ordinateur, le clavier physique peut piloter la saisie: les chiffres `0` a
+`9` tapent le score, `Entree` valide, `Retour arriere` efface un chiffre et
+`Echap` efface toute la saisie. Il est desactive quand une fenetre de fermeture
+ou de correction est ouverte.
+
+Le grand score central en cours de saisie reste en couleur normale; le rouge
+signale seulement une saisie invalide.
 
 ## 5. Bust, miss et checkout
 
@@ -167,12 +177,17 @@ L'application guide les etapes:
 - derniers simples;
 - resultat final.
 
-Le score de rencontre est mis a jour automatiquement apres chaque match.
+Le score de rencontre est mis a jour automatiquement apres chaque match. Il est
+affiche entre les matchs (composition, stats, resultat final). Pendant le scoring
+d'un match, cette ligne est masquee pour agrandir le score restant au centre.
 
 ## 12. Modifier la configuration d'une rencontre
 
 Pendant une rencontre, le bouton de configuration permet de modifier certains
-parametres pour les matchs qui ne sont pas encore joues.
+parametres pour les matchs qui ne sont pas encore joues. Entre les matchs, il se
+trouve dans le bandeau de la rencontre. Pendant le scoring d'un match, il reste
+accessible sous le libelle `Configurer` dans la barre du haut, a cote de
+`Annuler`.
 
 Les matchs deja joues ou deja demarres doivent rester verrouilles afin de ne pas
 casser l'historique.

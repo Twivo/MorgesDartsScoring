@@ -17,8 +17,11 @@ sont recalcules par le moteur TypeScript pur a partir de ces evenements.
   grand au centre.
 - Etoile discrete a cote du nom, dans la carte de score du joueur qui commence
   le leg.
+- Saisie au clavier tactile inverse, et au clavier physique sur ordinateur
+  (chiffres, Entree, Retour arriere, Echap).
 - Matchs simples et doubles.
 - Mode entrainement public et rapide, utilisable sans connexion.
+- Connexion / deconnexion directement depuis l'accueil, avec page dediee `#/login`.
 - Mode championnat protege par connexion admin.
 - Rencontre de championnat par equipes: 4 simples, 2 doubles, 4 simples.
 - Preselection de l'equipe Jedis a domicile, avec choix manuel toujours possible.
@@ -148,7 +151,7 @@ src/
   App.tsx                     Routes principales
   main.tsx                    Bootstrap React, providers, HashRouter
   components/                 Composants partages
-  components/ui/              UI generique: Button, Modal, ConfirmProvider
+  components/ui/              UI generique: Button, Modal, Loading, ConfirmProvider
   data/                       Contrats repository/auth + backends local/Supabase
   domain/                     Moteur pur: scoring, validation, stats
   domain/championship/        Moteur pur des rencontres par equipes

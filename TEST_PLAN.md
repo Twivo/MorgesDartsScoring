@@ -24,6 +24,8 @@ Donnees recommandees:
 - [ ] Le logo MorgesDartsConnect s'affiche.
 - [ ] Le favicon est visible dans l'onglet navigateur.
 - [ ] Le switch FR/EN change les textes visibles.
+- [ ] Le bouton `Se connecter` / `Se deconnecter` en haut de l'accueil ouvre la
+      page de connexion ou ferme la session admin.
 - [ ] Les boutons principaux sont visibles:
   - Nouvelle partie d'entrainement;
   - Match de championnat;
@@ -55,6 +57,12 @@ Donnees recommandees:
 - [ ] Saisir un score valide puis valider.
 - [ ] Le grand score central diminue en direct pendant la saisie.
 - [ ] Toucher le grand score central valide aussi la visite.
+- [ ] Sur ordinateur, les touches `0-9` tapent le score, `Entree` valide,
+      `Retour arriere` efface un chiffre et `Echap` efface la saisie.
+- [ ] Le clavier physique ne reagit plus quand une fenetre de fermeture ou de
+      correction est ouverte.
+- [ ] Le grand score central en cours de saisie reste en couleur normale; le
+      rouge apparait seulement pour une saisie invalide.
 - [ ] Les scores restants, le joueur actif et l'historique se mettent a jour.
 - [ ] Les scores rapides (colonnes laterales, `140` et `180`) valident
       immediatement.
@@ -139,6 +147,11 @@ Donnees recommandees:
 - [ ] Demarrer le match 1.
 - [ ] Faire le bull-up.
 - [ ] Verifier que le gagnant du bull commence.
+- [ ] Pendant le scoring, le bandeau du score de rencontre est masque et le
+      bouton `Configurer` est accessible dans la barre du haut, a cote de
+      `Annuler`.
+- [ ] Entre les matchs (composition, stats, final), le bandeau du score de
+      rencontre reapparait.
 - [ ] Terminer un match.
 - [ ] Verifier que le score de rencontre augmente.
 - [ ] Passer au match suivant.
@@ -174,6 +187,8 @@ Donnees recommandees:
 - [ ] Mobile portrait: scoring utilisable sans zoom.
 - [ ] Tablette paysage et laptop: score, clavier et historique restent lisibles,
       et l'historique montre les dernieres visites sans deborder.
+- [ ] Sur tablette d'au moins 11 pouces et grand ecran, les touches du clavier
+      et le score restant central sont agrandis sans provoquer de debordement.
 - [ ] Le clavier et le bouton `Valider` restent entierement visibles a l'ecran.
 - [ ] Les textes des boutons ne debordent pas.
 - [ ] Les popups restent accessibles sur petit ecran.

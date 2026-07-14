@@ -25,13 +25,16 @@ L'application doit rester:
 - `src/data`: interfaces repository/auth + implementations local/Supabase.
 - `src/store`: contextes React, persistence, live, verrouillage et orchestration.
 - `src/features`: ecrans organises par domaine fonctionnel.
-- `src/components`: composants reutilisables.
+- `src/components`: composants reutilisables (`components/ui`: Button, Modal,
+  Loading, ConfirmProvider).
 - `src/store/LangContext.tsx`: dictionnaire FR/EN des textes visibles.
 - `supabase/migrations`: schema SQL et policies RLS.
 
 ## Routes principales
 
 - `/`: accueil.
+- `/login`: page de connexion admin, ouverte par le bouton `Se connecter` de
+  l'accueil (l'accueil affiche `Se connecter` ou `Se deconnecter` selon la session).
 - `/new`: nouvelle partie d'entrainement.
 - `/game/:id`: match en cours.
 - `/live`: liste des matchs live.
@@ -85,6 +88,8 @@ npm audit --json
   ou la config Git.
 - Ne pas ajouter de dependance sans raison claire.
 - Preferer une correction locale a une abstraction generale prematuree.
+- Reutiliser les composants partages de `components/ui` (ex. `Loading`, `Button`)
+  plutot que reinliner un markup equivalent.
 
 ## Internationalisation
 
@@ -110,7 +115,8 @@ npm audit --json
 - Cible materielle: tablette d'au moins 11 pouces. Le scoring tient sans
   debordement en paysage (deux colonnes, pave a droite) comme en portrait
   (colonne unique). Sur >= lg, les touches du pave sont agrandies (lg:h-20)
-  pour de meilleures cibles tactiles.
+  pour de meilleures cibles tactiles; leur hauteur est factorisee dans la
+  constante `KEY_H` de `Keypad.tsx`.
 - Sur ordinateur, le clavier physique pilote la saisie: chiffres 0-9, Entree
   (valider), Retour arriere (effacer un chiffre), Echap (tout effacer). Un
   seul ecouteur window keydown, cable via une ref pour rester valide sans se
