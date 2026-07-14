@@ -10,6 +10,7 @@ import {
 import { loadMatch, persistMatch } from '@/store/matchService';
 import { buildEncounterState } from '@/domain/championship/encounter';
 import { useT } from '@/store/LangContext';
+import { Loading } from '@/components/ui/Loading';
 import type { EncounterRecord } from '@/data/types';
 import type { Side } from '@/domain/championship/types';
 import { EncounterHeader } from './EncounterHeader';
@@ -44,11 +45,7 @@ export function ChampionshipRoute() {
   }, [id]);
 
   if (loading) {
-    return (
-      <div className="flex min-h-screen items-center justify-center text-[var(--color-text-dim)]">
-        {t('champ.loadingEncounter')}
-      </div>
-    );
+    return <Loading label={t('champ.loadingEncounter')} />;
   }
   if (!encounter) return <Navigate to="/" replace />;
 

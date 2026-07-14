@@ -66,21 +66,12 @@ export function HomeScreen() {
   return (
     <div className="relative mx-auto flex min-h-screen max-w-lg flex-col items-center justify-center gap-10 px-6 py-12">
       <div className="absolute right-4 top-4 flex items-center gap-2">
-        {user ? (
-          <button
-            onClick={() => void signOut()}
-            className="rounded-lg border border-[var(--color-border)] px-2.5 py-1 text-xs font-bold text-[var(--color-text-dim)] transition-colors hover:text-[var(--color-text)]"
-          >
-            {t('admin.signOut')}
-          </button>
-        ) : (
-          <button
-            onClick={() => navigate('/login')}
-            className="rounded-lg border border-[var(--color-border)] px-2.5 py-1 text-xs font-bold text-[var(--color-text-dim)] transition-colors hover:text-[var(--color-text)]"
-          >
-            {t('admin.signIn')}
-          </button>
-        )}
+        <button
+          onClick={user ? () => void signOut() : () => navigate('/login')}
+          className="rounded-lg border border-[var(--color-border)] px-2.5 py-1 text-xs font-bold text-[var(--color-text-dim)] transition-colors hover:text-[var(--color-text)]"
+        >
+          {t(user ? 'admin.signOut' : 'admin.signIn')}
+        </button>
         <LangToggle />
       </div>
       <div className="text-center">

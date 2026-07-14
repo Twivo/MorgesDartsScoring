@@ -7,6 +7,8 @@ const QUICK_RIGHT = [60, 81, 99, 100];
 const QUICK_BOTTOM = [140, 180];
 // 1 at the top, 9 at the bottom.
 const DIGITS = ['1', '2', '3', '4', '5', '6', '7', '8', '9'];
+// Numpad key height, shared by every key (incl. FinishKey) so they stay aligned.
+const KEY_H = 'h-14 sm:h-16 lg:h-20';
 
 /**
  * Numeric keypad. Buffer = the SCORE thrown (✓ / VALIDATE / quick scores
@@ -98,22 +100,22 @@ export function Keypad({
                 label={d}
                 onClick={() => onDigit(d)}
                 disabled={disabled}
-                className="h-14 sm:h-16 lg:h-20"
+                className={KEY_H}
               />
             ),
           )}
-          <PlainKey label="0" onClick={() => onDigit('0')} disabled={disabled} className="h-14 sm:h-16 lg:h-20" />
+          <PlainKey label="0" onClick={() => onDigit('0')} disabled={disabled} className={KEY_H} />
           <PlainKey
             label="⌫"
             onClick={onBackspace}
             disabled={disabled}
-            className="h-14 text-[var(--color-text-dim)] sm:h-16 lg:h-20"
+            className={cn(KEY_H, 'text-[var(--color-text-dim)]')}
           />
           <PlainKey
             label="✓"
             onClick={onCommit}
             disabled={disabled}
-            className="h-14 bg-[var(--color-accent)] text-white active:bg-[var(--color-accent-hover)] sm:h-16 lg:h-20"
+            className={cn(KEY_H, 'bg-[var(--color-accent)] text-white active:bg-[var(--color-accent-hover)]')}
           />
         </div>
 
@@ -216,7 +218,10 @@ function FinishKey({
     <button
       {...handlers}
       disabled={disabled}
-      className="relative flex h-14 items-center justify-center rounded-xl bg-[var(--color-success)] text-3xl font-black text-white transition-all active:scale-95 disabled:opacity-40 sm:h-16 lg:h-20"
+      className={cn(
+        KEY_H,
+        'relative flex items-center justify-center rounded-xl bg-[var(--color-success)] text-3xl font-black text-white transition-all active:scale-95 disabled:opacity-40',
+      )}
     >
       {digit}
       <span className="absolute bottom-1 text-xs font-semibold uppercase opacity-80">

@@ -2,16 +2,8 @@ import type { ReactNode } from 'react';
 import { Navigate } from 'react-router-dom';
 import { useAuth } from '@/store/AuthContext';
 import { useT } from '@/store/LangContext';
+import { Loading } from '@/components/ui/Loading';
 import { AdminLogin } from './AdminLogin';
-
-function Loading() {
-  const { t } = useT();
-  return (
-    <div className="flex min-h-screen items-center justify-center text-[var(--color-text-dim)]">
-      {t('common.loading')}
-    </div>
-  );
-}
 
 /** Gate that makes everything inside totally inaccessible without auth. */
 export function RequireAuth({ children }: { children: ReactNode }) {
